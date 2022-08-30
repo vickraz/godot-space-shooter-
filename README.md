@@ -1,2 +1,2 @@
 # godot-space-shooter-
-För korsen tillämpad programmering
+För kursen tillämpad programmering
