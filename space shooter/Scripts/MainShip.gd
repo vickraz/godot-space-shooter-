@@ -22,7 +22,7 @@ func _physics_process(delta: float) -> void:
 	
 	_move_ship(delta)
 	
-	print(max_velocity)
+	_update_boosters()
 	
 
 func _move_ship(delta: float) -> void:
@@ -34,8 +34,12 @@ func _move_ship(delta: float) -> void:
 	
 	velocity = move_and_slide(velocity)
 	
+func _update_boosters() -> void:
+	pass
 
-
+func _rotate_ship() -> void:
+	pass
+	
 #Anropas automatiskt då timern tar slut
 func _on_BoostTimer_timeout() -> void:
 	can_boost = true

@@ -26,7 +26,15 @@ scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 3 )
 
 [node name="MainBooster" type="Sprite" parent="."]
+position = Vector2( -42, 1.49214e-13 )
+rotation = 1.5708
+scale = Vector2( 0.4, 0.4 )
+texture = ExtResource( 3 )
 
 [node name="RightBooster" type="Sprite" parent="."]
+position = Vector2( -35, 15 )
+rotation = 1.5708
+scale = Vector2( 0.25, 0.25 )
+texture = ExtResource( 3 )
 
 [connection signal="timeout" from="BoostTimer" to="." method="_on_BoostTimer_timeout"]
