@@ -4,21 +4,27 @@ const ACCELERATION = 1500
 
 var max_velocity := 500
 var direction := Vector2.RIGHT
-var velocity = Vector2.ZERO
+var velocity := Vector2.ZERO
 
 var can_boost := true
+var can_shoot := true
+
+var bullet_scene = preload("res://Scenes/Bullet.tscn")
 
 func _ready() -> void:
 	#Startposition på skärmen
 	global_position = Vector2(300, 300)
 
 func _physics_process(delta: float) -> void:
-	look_at(get_global_mouse_position())
+	_rotate_ship()
 	
 	if Input.is_action_just_pressed("boost") and can_boost:
 		max_velocity = 800
 		can_boost = false
 		$BoostTimer.start()
+	
+	if Input.is_action_pressed("shoot") and can_shoot:
+		_shoot()
 	
 	_move_ship(delta)
 	
@@ -35,12 +41,40 @@ func _move_ship(delta: float) -> void:
 	velocity = move_and_slide(velocity)
 	
 func _update_boosters() -> void:
-	pass
+	var speed_rate = velocity.length()/500
+	
+	$LeftBooster.scale = Vector2(0.25, 0.25) * speed_rate
+	$MainBooster.scale = Vector2(0.4, 0.4) * speed_rate
+	$RightBooster.scale = Vector2(0.25, 0.25) * speed_rate
+	
 
 func _rotate_ship() -> void:
-	pass
+	var desired_rotation = (get_global_mouse_position() - global_position).angle()
 	
+	rotation = lerp_angle(rotation, desired_rotation, 0.2)
+	
+func _shoot() -> void:
+	can_shoot = false
+	$ShootTimer.start()
+	
+	var bullet_instance = bullet_scene.instance()
+	bullet_instance.global_position = $Bulletspawn.global_position
+	bullet_instance.set_direction($Bulletspawn.global_position, get_global_mouse_position())
+	
+	get_tree().get_root().add_child(bullet_instance)
+	
+	var bullet_instance2 = bullet_scene.instance()
+	bullet_instance2.global_position = $Bulletspawn2.global_position
+	bullet_instance2.set_direction($Bulletspawn2.global_position, get_global_mouse_position())
+	
+	get_tree().get_root().add_child(bullet_instance2)
+	
+
 #Anropas automatiskt då timern tar slut
 func _on_BoostTimer_timeout() -> void:
 	can_boost = true
 	max_velocity = 500
+
+
+func _on_ShootTimer_timeout() -> void:
+	can_shoot = true
