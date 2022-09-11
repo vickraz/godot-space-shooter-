@@ -43,9 +43,9 @@ func _move_ship(delta: float) -> void:
 func _update_boosters() -> void:
 	var speed_rate = velocity.length()/500
 	
-	$LeftBooster.scale = Vector2(0.25, 0.25) * speed_rate
-	$MainBooster.scale = Vector2(0.4, 0.4) * speed_rate
-	$RightBooster.scale = Vector2(0.25, 0.25) * speed_rate
+	$ThrusterFlame.scale = Vector2(0.25, 0.25) * speed_rate
+	$ThrusterFlame2.scale = Vector2(0.15, 0.15) * speed_rate
+	$ThrusterFlame3.scale = Vector2(0.15, 0.15) * speed_rate
 	
 
 func _rotate_ship() -> void:
@@ -70,11 +70,11 @@ func _shoot() -> void:
 	get_tree().get_root().add_child(bullet_instance2)
 	
 
-#Anropas automatiskt då timern tar slut
+#Anropas automatiskt då BoostTimern tar slut
 func _on_BoostTimer_timeout() -> void:
 	can_boost = true
 	max_velocity = 500
 
-
+#Anropas automatiskt då ShootTimern tar slut
 func _on_ShootTimer_timeout() -> void:
 	can_shoot = true
