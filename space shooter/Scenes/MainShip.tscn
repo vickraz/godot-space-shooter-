@@ -5,6 +5,7 @@
 [ext_resource path="res://Scenes/ThrusterFlame.tscn" type="PackedScene" id=4]
 
 [node name="MainShip" type="KinematicBody2D"]
+collision_mask = 10
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
@@ -31,17 +32,20 @@ wait_time = 0.2
 [node name="ThrusterFlame" parent="." instance=ExtResource( 4 )]
 show_behind_parent = true
 position = Vector2( -30, 0 )
-scale = Vector2( 0.4, 0.4 )
+scale = Vector2( 0.25, 0.25 )
 
 [node name="ThrusterFlame2" parent="." instance=ExtResource( 4 )]
 show_behind_parent = true
 position = Vector2( -25, 15 )
-scale = Vector2( 0.25, 0.25 )
+scale = Vector2( 0.15, 0.15 )
 
 [node name="ThrusterFlame3" parent="." instance=ExtResource( 4 )]
 show_behind_parent = true
 position = Vector2( -25, -15 )
-scale = Vector2( 0.25, 0.25 )
+scale = Vector2( 0.15, 0.15 )
+
+[node name="MainCamera" type="Camera2D" parent="."]
+current = true
 
 [connection signal="timeout" from="BoostTimer" to="." method="_on_BoostTimer_timeout"]
 [connection signal="timeout" from="ShootTimer" to="." method="_on_ShootTimer_timeout"]

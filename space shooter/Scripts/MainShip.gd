@@ -59,13 +59,15 @@ func _shoot() -> void:
 	
 	var bullet_instance = bullet_scene.instance()
 	bullet_instance.global_position = $Bulletspawn.global_position
-	bullet_instance.set_direction($Bulletspawn.global_position, get_global_mouse_position())
+	bullet_instance.set_direction($Bulletspawn.global_position, 
+	get_global_mouse_position() + direction.rotated(rotation) * 1000)
 	
 	get_tree().get_root().add_child(bullet_instance)
 	
 	var bullet_instance2 = bullet_scene.instance()
 	bullet_instance2.global_position = $Bulletspawn2.global_position
-	bullet_instance2.set_direction($Bulletspawn2.global_position, get_global_mouse_position())
+	bullet_instance2.set_direction($Bulletspawn2.global_position, 
+	get_global_mouse_position() + direction.rotated(rotation) * 1000)
 	
 	get_tree().get_root().add_child(bullet_instance2)
 	
