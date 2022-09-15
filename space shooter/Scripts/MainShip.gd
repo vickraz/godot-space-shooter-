@@ -11,6 +11,8 @@ var can_shoot := true
 
 var bullet_scene = preload("res://Scenes/Bullet.tscn")
 
+var hp = 100
+
 func _ready() -> void:
 	#Startposition på skärmen
 	global_position = Vector2(300, 300)
@@ -80,3 +82,9 @@ func _on_BoostTimer_timeout() -> void:
 #Anropas automatiskt då ShootTimern tar slut
 func _on_ShootTimer_timeout() -> void:
 	can_shoot = true
+
+func take_damage(amount: int) -> void:
+	hp -= amount
+	
+	if hp <= 0:
+		get_tree().reload_current_scene()

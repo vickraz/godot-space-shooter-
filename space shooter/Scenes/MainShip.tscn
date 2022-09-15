@@ -4,7 +4,7 @@
 [ext_resource path="res://Scripts/MainShip.gd" type="Script" id=2]
 [ext_resource path="res://Scenes/ThrusterFlame.tscn" type="PackedScene" id=4]
 
-[node name="MainShip" type="KinematicBody2D"]
+[node name="MainShip" type="KinematicBody2D" groups=["Player"]]
 collision_mask = 10
 script = ExtResource( 2 )
 

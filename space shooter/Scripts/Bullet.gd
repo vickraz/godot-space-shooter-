@@ -35,3 +35,14 @@ func _on_Bullet_area_entered(area: Area2D) -> void:
 		explosion_instance.emitting = true
 		get_tree().get_root().add_child(explosion_instance)
 		queue_free()
+
+
+func _on_Bullet_body_entered(body: Node) -> void:
+	if body.is_in_group("Enemy"):
+		body.die()
+		
+		var explosion_instance = bullet_explosion_scene.instance()
+		explosion_instance.global_position = global_position
+		explosion_instance.emitting = true
+		get_tree().get_root().add_child(explosion_instance)
+		queue_free()
