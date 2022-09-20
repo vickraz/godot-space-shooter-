@@ -5,6 +5,7 @@ const MAX_VELOCITY = 350
 const ACCELERATION = 500
 
 var velocity := Vector2.ZERO
+var direction_to_player := Vector2.ZERO
 
 var player = null
 
@@ -18,7 +19,7 @@ func _physics_process(delta: float) -> void:
 	if player == null:
 		return
 	else:
-		var direction_to_player = player.global_position - global_position
+		direction_to_player = player.global_position - global_position
 		var desired_velocity = direction_to_player.normalized() * MAX_VELOCITY
 		velocity = velocity.move_toward(desired_velocity, ACCELERATION * delta)
 		
@@ -39,7 +40,7 @@ func die() -> void:
 
 func _on_Area2D_body_entered(body: Node) -> void:
 	if body.is_in_group("Player"):
-		body.take_damage(25)
+		body.take_damage(25, direction_to_player)
 		
 		var explosion_instance = alienGreenExplosion_scene.instance()
 		explosion_instance.global_position = global_position

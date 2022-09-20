@@ -16,6 +16,7 @@ var hp = 100
 func _ready() -> void:
 	#Startposition på skärmen
 	global_position = Vector2(300, 300)
+	$Shield.visible = false
 
 func _physics_process(delta: float) -> void:
 	_rotate_ship()
@@ -40,7 +41,7 @@ func _move_ship(delta: float) -> void:
 	else:
 		velocity = velocity.move_toward(Vector2.ZERO, ACCELERATION * delta)
 	
-	velocity = move_and_slide(velocity)
+	move_and_collide(velocity * delta)
 	
 func _update_boosters() -> void:
 	var speed_rate = velocity.length()/500
@@ -83,8 +84,11 @@ func _on_BoostTimer_timeout() -> void:
 func _on_ShootTimer_timeout() -> void:
 	can_shoot = true
 
-func take_damage(amount: int) -> void:
+func take_damage(amount: int, direction: Vector2) -> void:
+	velocity = direction.normalized() * 1000
 	hp -= amount
+	$AnimationPlayer.play("DamageToShield")
+	$Shield.global_rotation = direction.angle() + PI
 	
 	if hp <= 0:
 		get_tree().reload_current_scene()
