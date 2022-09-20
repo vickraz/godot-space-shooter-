@@ -8,6 +8,7 @@ var velocity := Vector2.ZERO
 
 var can_boost := true
 var can_shoot := true
+var can_take_damage := true
 
 var bullet_scene = preload("res://Scenes/Bullet.tscn")
 
@@ -86,9 +87,16 @@ func _on_ShootTimer_timeout() -> void:
 
 func take_damage(amount: int, direction: Vector2) -> void:
 	velocity = direction.normalized() * 1000
-	hp -= amount
-	$AnimationPlayer.play("DamageToShield")
-	$Shield.global_rotation = direction.angle() + PI
-	
-	if hp <= 0:
-		get_tree().reload_current_scene()
+	if can_take_damage:
+		hp -= amount
+		can_take_damage = false
+		$AnimationPlayer.play("DamageToShield")
+		$Shield.global_rotation = direction.angle() + PI
+		
+		if hp <= 0:
+			get_tree().reload_current_scene()
+
+
+func _on_AnimationPlayer_animation_finished(anim_name: String) -> void:
+	if anim_name == "DamageToShield":
+		can_take_damage = true

@@ -113,3 +113,4 @@ anims/RESET = SubResource( 2 )
 
 [connection signal="timeout" from="BoostTimer" to="." method="_on_BoostTimer_timeout"]
 [connection signal="timeout" from="ShootTimer" to="." method="_on_ShootTimer_timeout"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
