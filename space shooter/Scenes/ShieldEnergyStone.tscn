@@ -1,0 +1,70 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://Pickups/crystal-qubodup-ccby3-32-blue.png" type="Texture" id=1]
+[ext_resource path="res://Scripts/ShieldEnergyStone.gd" type="Script" id=2]
+
+[sub_resource type="AtlasTexture" id=1]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=2]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 32, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=3]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 64, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=4]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 96, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=5]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 128, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=6]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 160, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=7]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 192, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=8]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 224, 0, 32, 32 )
+
+[sub_resource type="SpriteFrames" id=9]
+animations = [ {
+"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ) ],
+"loop": true,
+"name": "default",
+"speed": 10.0
+} ]
+
+[sub_resource type="CapsuleShape2D" id=10]
+radius = 9.0
+height = 10.0
+
+[node name="ShieldEnergyStone" type="Area2D"]
+collision_layer = 8
+script = ExtResource( 2 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+frames = SubResource( 9 )
+frame = 5
+playing = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 10 )
+
+[connection signal="body_entered" from="." to="." method="_on_ShieldEnergyStone_body_entered"]

@@ -1,5 +1,7 @@
 extends KinematicBody2D
 
+signal hit
+
 const ACCELERATION = 1500
 
 var max_velocity := 500
@@ -12,7 +14,7 @@ var can_take_damage := true
 
 var bullet_scene = preload("res://Scenes/Bullet.tscn")
 
-var hp = 100
+var shield_energy = 100
 
 func _ready() -> void:
 	#Startposition på skärmen
@@ -88,15 +90,23 @@ func _on_ShootTimer_timeout() -> void:
 func take_damage(amount: int, direction: Vector2) -> void:
 	velocity = direction.normalized() * 1000
 	if can_take_damage:
-		hp -= amount
+		emit_signal("hit")
+		shield_energy -= amount
 		can_take_damage = false
 		$AnimationPlayer.play("DamageToShield")
 		$Shield.global_rotation = direction.angle() + PI
 		
-		if hp <= 0:
+		if shield_energy <= 0:
 			get_tree().reload_current_scene()
 
 
 func _on_AnimationPlayer_animation_finished(anim_name: String) -> void:
 	if anim_name == "DamageToShield":
 		can_take_damage = true
+		
+func pick_up(item_name: String) -> void:
+	if item_name == "energystone":
+		shield_energy += 25
+		if shield_energy > 100:
+			shield_energy = 100
+		
