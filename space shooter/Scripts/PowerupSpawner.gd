@@ -16,7 +16,9 @@ func _ready() -> void:
 	
 
 func _on_EnergyStone_pickup() -> void:
+	can_place_energy_stone = true
 	if player.shield_energy < 100:
+		can_place_energy_stone = false
 		$ShieldEnergyTimer.wait_time = rand_range(12, 18)
 		$ShieldEnergyTimer.start()
 
@@ -27,13 +29,14 @@ func _on_ShieldEnergyTimer_timeout() -> void:
 	var section = randi() % 4
 	#placerar stenen på skärmen med hjälp av global_position
 	if section == 0:
-		pass
+		stone.global_position = player.global_position + Vector2(-DISPLACEMENT, rand_range(-HEIGHT/2, HEIGHT/2))
 	elif section == 1:
-		pass
+		stone.global_position = player.global_position + Vector2(DISPLACEMENT, rand_range(-HEIGHT/2, HEIGHT/2))
 	elif section == 2:
-		pass
+		stone.global_position = player.global_position + Vector2(rand_range(-WIDTH/2, WIDTH/2), DISPLACEMENT)
 	else:
-		pass
+		stone.global_position = player.global_position + Vector2(rand_range(-WIDTH/2, WIDTH/2), -DISPLACEMENT)
+	
 	add_child(stone)
 	
 
