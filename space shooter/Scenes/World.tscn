@@ -31,7 +31,9 @@ script = ExtResource( 6 )
 one_shot = true
 
 [node name="LaserTimer" type="Timer" parent="PowerupSpawner"]
+one_shot = true
 
 [connection signal="hit" from="MainShip" to="PowerupSpawner" method="_on_MainShip_hit"]
 [connection signal="timeout" from="AlienSpawner/AlienSpawnTimer" to="AlienSpawner" method="_on_AlienSpawnTimer_timeout"]
 [connection signal="timeout" from="PowerupSpawner/ShieldEnergyTimer" to="PowerupSpawner" method="_on_ShieldEnergyTimer_timeout"]
+[connection signal="timeout" from="PowerupSpawner/LaserTimer" to="PowerupSpawner" method="_on_LaserTimer_timeout"]

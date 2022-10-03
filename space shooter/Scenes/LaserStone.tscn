@@ -1,8 +1,8 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=14 format=2]
 
-[ext_resource path="res://Pickups/crystal-qubodup-ccby3-32-blue.png" type="Texture" id=1]
-[ext_resource path="res://Scripts/ShieldEnergyStone.gd" type="Script" id=2]
-[ext_resource path="res://Pickups/arrow.png" type="Texture" id=3]
+[ext_resource path="res://Pickups/crystal-qubodup-ccby3-32-orange.png" type="Texture" id=1]
+[ext_resource path="res://Pickups/arrow.png" type="Texture" id=2]
+[ext_resource path="res://Scripts/LaserStone.gd" type="Script" id=3]
 
 [sub_resource type="AtlasTexture" id=1]
 flags = 4
@@ -54,34 +54,26 @@ animations = [ {
 
 [sub_resource type="CapsuleShape2D" id=10]
 radius = 9.0
-height = 10.0
+height = 12.0
 
-[sub_resource type="CanvasItemMaterial" id=11]
-blend_mode = 1
-
-[node name="ShieldEnergyStone" type="Area2D"]
+[node name="LaserStone" type="Area2D"]
 collision_layer = 8
-script = ExtResource( 2 )
+script = ExtResource( 3 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 9 )
-frame = 5
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 10 )
 
 [node name="Indicator" type="Sprite" parent="."]
-modulate = Color( 0, 0.862745, 1, 1 )
-self_modulate = Color( 0, 1, 0.854902, 1 )
-material = SubResource( 11 )
-position = Vector2( -18, 0 )
 scale = Vector2( 0.05, 0.05 )
-texture = ExtResource( 3 )
+texture = ExtResource( 2 )
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
 rect = Rect2( -8, -12, 16, 24 )
 
-[connection signal="body_entered" from="." to="." method="_on_ShieldEnergyStone_body_entered"]
+[connection signal="body_entered" from="." to="." method="_on_LaserStone_body_entered"]
 [connection signal="screen_entered" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_entered"]
 [connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]

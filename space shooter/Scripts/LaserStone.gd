@@ -1,6 +1,5 @@
 extends Area2D
 
-
 signal pickup
 
 onready var player = get_node("/root/World/MainShip")
@@ -13,10 +12,11 @@ func _process(delta: float) -> void:
 		indicator.global_position = player.global_position + dir_to_stone.normalized() * 280
 
 
-func _on_ShieldEnergyStone_body_entered(body: Node) -> void:
+
+func _on_LaserStone_body_entered(body: Node) -> void:
 	if body.is_in_group("Player"):
 		emit_signal("pickup")
-		body.pick_up("energystone")
+		body.pick_up("laserstone")
 		queue_free()
 
 
