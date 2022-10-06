@@ -11,8 +11,10 @@ var velocity := Vector2.ZERO
 var can_boost := true
 var can_shoot := true
 var can_take_damage := true
+var laser_active := false
 
 var bullet_scene = preload("res://Scenes/Bullet.tscn")
+var laser_scene = preload("res://Scenes/Laser.tscn")
 
 var shield_energy = 100
 
@@ -29,7 +31,7 @@ func _physics_process(delta: float) -> void:
 		can_boost = false
 		$BoostTimer.start()
 	
-	if Input.is_action_pressed("shoot") and can_shoot:
+	if Input.is_action_pressed("shoot") and can_shoot and not laser_active:
 		_shoot()
 	
 	_move_ship(delta)
@@ -109,4 +111,12 @@ func pick_up(item_name: String) -> void:
 		shield_energy += 25
 		if shield_energy > 100:
 			shield_energy = 100
-		
+	elif item_name == "laserstone":
+		laser_active = true
+		var laser = laser_scene.instance()
+		laser.position = $LaserSpawn.position
+		laser.connect("laser_deactivated", self, "_deactivate_laser")
+		add_child(laser)
+
+func _deactivate_laser() -> void:
+	laser_active = false
