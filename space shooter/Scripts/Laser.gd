@@ -7,6 +7,7 @@ var laser_active = false
 
 onready var timer = $EnergyTimer
 onready var raycast = $RayCast2D
+onready var beamparticles = $BeamParticles
 
 func _ready() -> void:
 	visible = false
@@ -18,6 +19,8 @@ func _physics_process(delta: float) -> void:
 		if not laser_active:
 			_appear()
 		
+		beamparticles.position = points[1] / 2
+		beamparticles.process_material.emission_box_extents.x = points[1].length() / 2
 		raycast.cast_to = points[1]
 		raycast.force_raycast_update()
 		if raycast.is_colliding():

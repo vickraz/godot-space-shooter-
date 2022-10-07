@@ -1,9 +1,56 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Scripts/Laser.gd" type="Script" id=1]
+[ext_resource path="res://Effects/glowing_circle.png" type="Texture" id=2]
 
 [sub_resource type="Gradient" id=1]
 colors = PoolColorArray( 0.980469, 0.0153198, 0.0153198, 1, 1, 0.609375, 0, 1 )
+
+[sub_resource type="CanvasItemMaterial" id=2]
+blend_mode = 1
+
+[sub_resource type="Curve" id=5]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.188591 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=6]
+curve = SubResource( 5 )
+
+[sub_resource type="ParticlesMaterial" id=7]
+lifetime_randomness = 0.24
+flag_disable_z = true
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 30.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale_curve = SubResource( 6 )
+
+[sub_resource type="Gradient" id=8]
+offsets = PoolRealArray( 0, 0.749035, 1 )
+colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0 )
+
+[sub_resource type="GradientTexture" id=9]
+gradient = SubResource( 8 )
+
+[sub_resource type="Curve" id=11]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.577477 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=12]
+curve = SubResource( 11 )
+
+[sub_resource type="ParticlesMaterial" id=10]
+lifetime_randomness = 0.24
+emission_shape = 2
+emission_box_extents = Vector3( 300, 0, 0 )
+flag_disable_z = true
+spread = 30.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 100.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+radial_accel = 100.0
+scale = 0.6
+scale_curve = SubResource( 12 )
+color_ramp = SubResource( 9 )
 
 [node name="Laser" type="Line2D"]
 points = PoolVector2Array( 0, 0, 600, 0 )
@@ -19,5 +66,19 @@ collision_mask = 2
 wait_time = 2.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="CastingParticles" type="Particles2D" parent="."]
+modulate = Color( 1, 0, 0, 1 )
+material = SubResource( 2 )
+process_material = SubResource( 7 )
+texture = ExtResource( 2 )
+
+[node name="BeamParticles" type="Particles2D" parent="."]
+modulate = Color( 1, 0, 0, 1 )
+material = SubResource( 2 )
+position = Vector2( 300, 0 )
+amount = 12
+process_material = SubResource( 10 )
+texture = ExtResource( 2 )
 
 [connection signal="timeout" from="EnergyTimer" to="." method="_on_EnergyTimer_timeout"]
