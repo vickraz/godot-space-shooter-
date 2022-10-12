@@ -7,6 +7,7 @@ const HEIGHT = 600
 var alien_scene = preload("res://Scenes/Alien.tscn")
 
 onready var player = get_parent().get_node("MainShip")
+onready var HUD = get_parent().get_node("HUD")
 
 func _ready() -> void:
 	randomize()
@@ -19,7 +20,7 @@ func _can_spawn_aliens() -> bool:
 
 func _spawn_alien() -> void:
 	var alien = alien_scene.instance()
-	
+	alien.connect("scoreUpdated", HUD, "scoreUpdated")
 	var section = randi() % 4
 	if section == 0:
 		alien.global_position = player.global_position + Vector2(-WIDTH/2 - 20, rand_range(-HEIGHT/2, HEIGHT/2))
@@ -38,6 +39,7 @@ func _spawn_swarm() -> void:
 	for section in [0, 1, 2, 3]:
 		for i in range(3):
 			var alien = alien_scene.instance()
+			alien.connect("scoreUpdated", HUD, "scoreUpdated")
 			if section == 0:
 				alien.global_position = player.global_position + Vector2(-WIDTH/2 - 20, -HEIGHT/2 + i * HEIGHT/3)
 			elif section == 1:

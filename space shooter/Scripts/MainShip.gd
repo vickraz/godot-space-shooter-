@@ -1,6 +1,7 @@
 extends KinematicBody2D
 
 signal hit
+signal shieldEnergyChanged(shield_energy)
 
 const ACCELERATION = 1500
 
@@ -16,7 +17,7 @@ var laser_active := false
 var bullet_scene = preload("res://Scenes/Bullet.tscn")
 var laser_scene = preload("res://Scenes/Laser.tscn")
 
-var shield_energy = 100
+var shield_energy := 100
 
 func _ready() -> void:
 	#Startposition på skärmen
@@ -91,15 +92,15 @@ func _on_ShootTimer_timeout() -> void:
 
 func take_damage(amount: int, direction: Vector2) -> void:
 	velocity = direction.normalized() * 1000
-	if can_take_damage:
+	if shield_energy == 0 and can_take_damage:
+		get_tree().reload_current_scene()
+	elif can_take_damage:
 		emit_signal("hit")
 		shield_energy -= amount
 		can_take_damage = false
 		$AnimationPlayer.play("DamageToShield")
 		$Shield.global_rotation = direction.angle() + PI
-		
-		if shield_energy <= 0:
-			get_tree().reload_current_scene()
+		emit_signal("shieldEnergyChanged", shield_energy)
 
 
 func _on_AnimationPlayer_animation_finished(anim_name: String) -> void:
@@ -111,6 +112,7 @@ func pick_up(item_name: String) -> void:
 		shield_energy += 25
 		if shield_energy > 100:
 			shield_energy = 100
+		emit_signal("shieldEnergyChanged", shield_energy)
 	elif item_name == "laserstone":
 		laser_active = true
 		var laser = laser_scene.instance()

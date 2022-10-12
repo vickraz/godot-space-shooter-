@@ -1,0 +1,70 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Fonts and themes/Font.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://Bars/sheild.png" type="Texture" id=2]
+[ext_resource path="res://Bars/meter_icon_holder_blue.png" type="Texture" id=3]
+[ext_resource path="res://Scripts/HUD.gd" type="Script" id=4]
+
+[sub_resource type="DynamicFont" id=1]
+size = 42
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
+use_filter = true
+font_data = ExtResource( 1 )
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 0, 0.85098, 0.85098, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0, 0.215686, 0.215686, 1 )
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 0, 0.215686, 0.215686, 0.627451 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0, 0.215686, 0.215686, 1 )
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[node name="HUD" type="CanvasLayer"]
+layer = 2
+script = ExtResource( 4 )
+
+[node name="ScoreText" type="Label" parent="."]
+margin_left = 24.0
+margin_top = 14.0
+margin_right = 114.0
+margin_bottom = 53.0
+custom_fonts/font = SubResource( 1 )
+text = "Score: "
+
+[node name="ShieldBar" type="ProgressBar" parent="."]
+margin_left = 759.0
+margin_top = 14.0
+margin_right = 1002.0
+margin_bottom = 39.0
+custom_styles/fg = SubResource( 2 )
+custom_styles/bg = SubResource( 3 )
+value = 50.0
+percent_visible = false
+
+[node name="MeterIconHolderBlue" type="Sprite" parent="ShieldBar"]
+position = Vector2( 0, 25 )
+scale = Vector2( 0.09, 0.09 )
+texture = ExtResource( 3 )
+
+[node name="Sheild" type="Sprite" parent="ShieldBar/MeterIconHolderBlue"]
+modulate = Color( 0, 0.505882, 0.505882, 1 )
+texture = ExtResource( 2 )
+
+[node name="Tween" type="Tween" parent="."]

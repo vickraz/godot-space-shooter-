@@ -1,9 +1,11 @@
 extends KinematicBody2D
 
+signal scoreUpdated(amount)
 
 const MAX_VELOCITY = 350
 const ACCELERATION = 500
 
+var is_dead := false
 var velocity := Vector2.ZERO
 var direction_to_player := Vector2.ZERO
 
@@ -28,6 +30,9 @@ func _physics_process(delta: float) -> void:
 
 #Anropas av en bullet vid kollision
 func die() -> void:
+	if not is_dead:
+		is_dead = true
+		emit_signal("scoreUpdated", 10)
 	var explosion_instance = alienExplosion_scene.instance()
 	explosion_instance.global_position = $Sprite.global_position + Vector2(-80, -50)
 	explosion_instance.emitting = true
@@ -40,6 +45,7 @@ func die() -> void:
 
 func _on_Area2D_body_entered(body: Node) -> void:
 	if body.is_in_group("Player"):
+		emit_signal("scoreUpdated", -20)
 		body.take_damage(25, direction_to_player)
 		
 		var explosion_instance = alienGreenExplosion_scene.instance()
