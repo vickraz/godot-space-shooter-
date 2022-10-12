@@ -19,6 +19,8 @@ var laser_scene = preload("res://Scenes/Laser.tscn")
 
 var shield_energy := 100
 
+onready var HUD = get_parent().get_node("HUD")
+
 func _ready() -> void:
 	#Startposition på skärmen
 	global_position = Vector2(300, 300)
@@ -114,11 +116,17 @@ func pick_up(item_name: String) -> void:
 			shield_energy = 100
 		emit_signal("shieldEnergyChanged", shield_energy)
 	elif item_name == "laserstone":
-		laser_active = true
-		var laser = laser_scene.instance()
-		laser.position = $LaserSpawn.position
-		laser.connect("laser_deactivated", self, "_deactivate_laser")
-		add_child(laser)
+		if laser_active:
+			$Laser/EnergyTimer.start()
+			$Laser.time_left = 2.0
+		else:
+			laser_active = true
+			var laser = laser_scene.instance()
+			laser.position = $LaserSpawn.position
+			laser.connect("laser_deactivated", self, "_deactivate_laser")
+			laser.connect("laser_activated", HUD, "_activate_laser")
+			laser.connect("laser_deactivated", HUD, "_deactivate_laser")
+			add_child(laser)
 
 func _deactivate_laser() -> void:
 	laser_active = false

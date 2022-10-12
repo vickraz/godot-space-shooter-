@@ -2,9 +2,11 @@ extends Line2D
 
 
 signal laser_deactivated
+signal laser_activated(nodepath)
 
 var laser_active := false
 var out_of_energy := false
+var time_left := 2.0
 
 onready var timer = $EnergyTimer
 onready var raycast = $RayCast2D
@@ -14,12 +16,14 @@ func _ready() -> void:
 	visible = false
 	raycast.enabled = false
 	points[1] = Vector2.ZERO
+	emit_signal("laser_activated", self)
 
 func _physics_process(delta: float) -> void:
+	time_left = _set_time_left()
 	if Input.is_action_pressed("shoot"):
 		if not laser_active and not out_of_energy:
 			_appear()
-		
+	
 		beamparticles.position = points[1] / 2
 		beamparticles.process_material.emission_box_extents.x = points[1].length() / 2
 		raycast.cast_to = points[1]
@@ -66,3 +70,12 @@ func _deactivate_Laser() -> void:
 #Anropas via AnimationPlayer då "disappear" är klar
 func _pause_timer() -> void:
 	timer.paused = true
+	
+func _set_time_left() -> float:
+	if not out_of_energy:
+		if timer.time_left:
+			return timer.time_left
+		else:
+			return 2.0
+	else:
+		return 0.0

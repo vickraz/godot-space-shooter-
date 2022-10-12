@@ -4,13 +4,20 @@ var score: int = 0
 
 onready var shieldbar = $ShieldBar
 onready var scoretext = $ScoreText
+onready var laserbar = $LaserBar
 onready var tween = $Tween
+
+var laser = null
 
 func _ready() -> void:
 	shieldbar.value = 100
+	laserbar.value = 0
+	laserbar.visible = false
 	scoretext.text = "Score: " + str(score)
 
-
+func _process(delta: float) -> void:
+	if laser:
+		laserbar.value = move_toward(laserbar.value, 100* laser.time_left / 2, 2)
 
 #Signal från MainShip som meddelar den nuvarande skölden
 func _on_MainShip_shieldEnergyChanged(shield_energy) -> void:
@@ -19,6 +26,16 @@ func _on_MainShip_shieldEnergyChanged(shield_energy) -> void:
 
 
 #Uppdateras då signal från Alien mottas (connectas i AlienSpawner)
-func scoreUpdated(amount) -> void:
+func _scoreUpdated(amount) -> void:
 	score += amount
 	scoretext.text = "Score: " + str(score)
+
+#Signal från lasern då lasern aktiveras
+func _activate_laser(nodepath) -> void:
+	laserbar.visible = true
+	laser = nodepath
+
+#Signal från lasern då den avaktiveras
+func _deactivate_laser() -> void:
+	laserbar.visible = false
+	laser = null

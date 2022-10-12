@@ -1,9 +1,11 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Fonts and themes/Font.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Bars/sheild.png" type="Texture" id=2]
 [ext_resource path="res://Bars/meter_icon_holder_blue.png" type="Texture" id=3]
 [ext_resource path="res://Scripts/HUD.gd" type="Script" id=4]
+[ext_resource path="res://Bars/meter_icon_holder_red.png" type="Texture" id=5]
+[ext_resource path="res://Bars/power.png" type="Texture" id=6]
 
 [sub_resource type="DynamicFont" id=1]
 size = 42
@@ -31,6 +33,30 @@ border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
 border_color = Color( 0, 0.215686, 0.215686, 1 )
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id=4]
+bg_color = Color( 0.807843, 0.168627, 0.168627, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0.266667, 0.0745098, 0.0745098, 1 )
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id=5]
+bg_color = Color( 0.266667, 0.0745098, 0.0745098, 0.705882 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0.215686, 0.0588235, 0.0588235, 1 )
 corner_radius_top_left = 6
 corner_radius_top_right = 6
 corner_radius_bottom_right = 6
@@ -66,5 +92,27 @@ texture = ExtResource( 3 )
 [node name="Sheild" type="Sprite" parent="ShieldBar/MeterIconHolderBlue"]
 modulate = Color( 0, 0.505882, 0.505882, 1 )
 texture = ExtResource( 2 )
+
+[node name="LaserBar" type="ProgressBar" parent="."]
+margin_left = 759.0
+margin_top = 75.0
+margin_right = 1002.0
+margin_bottom = 100.0
+custom_styles/fg = SubResource( 4 )
+custom_styles/bg = SubResource( 5 )
+value = 50.0
+percent_visible = false
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="MeterIconHolderBlue" type="Sprite" parent="LaserBar"]
+position = Vector2( 0, 25 )
+scale = Vector2( 0.09, 0.09 )
+texture = ExtResource( 5 )
+
+[node name="Sheild" type="Sprite" parent="LaserBar/MeterIconHolderBlue"]
+modulate = Color( 1, 0, 0, 1 )
+texture = ExtResource( 6 )
 
 [node name="Tween" type="Tween" parent="."]

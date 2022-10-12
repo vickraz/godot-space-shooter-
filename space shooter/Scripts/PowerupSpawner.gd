@@ -14,7 +14,7 @@ var energy_stone_scene = preload("res://Scenes/ShieldEnergyStone.tscn")
 
 func _ready() -> void:
 	randomize()
-	$LaserTimer.wait_time = rand_range(8, 14)
+	$LaserTimer.wait_time = rand_range(2, 3)
 	$LaserTimer.start()
 	
 
@@ -26,7 +26,7 @@ func _on_EnergyStone_pickup() -> void:
 		$ShieldEnergyTimer.start()
 
 func _on_LaserStone_pickup() -> void:
-	$LaserTimer.wait_time = rand_range(15, 25)
+	$LaserTimer.wait_time = rand_range(2, 3)
 	$LaserTimer.start()
 
 
@@ -69,6 +69,3 @@ func _on_LaserTimer_timeout() -> void:
 		stone.global_position = player.global_position + Vector2(rand_range(-WIDTH/2, WIDTH/2), -DISPLACEMENT)
 	
 	add_child(stone)
-	
-	
-	
