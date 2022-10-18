@@ -11,7 +11,7 @@ config_version=4
 [application]
 
 config/name="space shooter"
-run/main_scene="res://Scenes/World.tscn"
+run/main_scene="res://Scenes/MainMenu.tscn"
 config/icon="res://Ship/green_ship.png"
 
 [display]
