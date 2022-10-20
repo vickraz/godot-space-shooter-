@@ -18,6 +18,7 @@ func _ready() -> void:
 	laserbarunder.visible = false
 	laserbar.visible = false
 	scoretext.text = "Score: " + str(score)
+	Shake.shake_nodes[self] = false
 
 func _process(delta: float) -> void:
 	if laser:

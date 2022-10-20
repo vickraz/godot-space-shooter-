@@ -32,6 +32,7 @@ func _physics_process(delta: float) -> void:
 func die() -> void:
 	if not is_dead:
 		is_dead = true
+		Shake.start_shake(3, 0.3)
 		emit_signal("scoreUpdated", 10)
 	var explosion_instance = alienExplosion_scene.instance()
 	explosion_instance.global_position = $Sprite.global_position + Vector2(-80, -50)
@@ -45,6 +46,7 @@ func die() -> void:
 
 func _on_Area2D_body_entered(body: Node) -> void:
 	if body.is_in_group("Player"):
+		Shake.start_shake(5, 0.5)
 		emit_signal("scoreUpdated", -20)
 		body.take_damage(25, direction_to_player)
 		

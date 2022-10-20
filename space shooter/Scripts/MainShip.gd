@@ -25,6 +25,7 @@ func _ready() -> void:
 	#Startposition på skärmen
 	global_position = Vector2(300, 300)
 	$Shield.visible = false
+	Shake.shake_nodes[$MainCamera] = true
 
 func _physics_process(delta: float) -> void:
 	_rotate_ship()
@@ -95,7 +96,8 @@ func _on_ShootTimer_timeout() -> void:
 func take_damage(amount: int, direction: Vector2) -> void:
 	velocity = direction.normalized() * 1000
 	if shield_energy == 0 and can_take_damage:
-		get_tree().reload_current_scene()
+		Shake.shake_nodes = {}
+		Transition.load_scene("res://Scenes/MainMenu.tscn")
 	elif can_take_damage:
 		emit_signal("hit")
 		shield_energy -= amount
@@ -117,8 +119,11 @@ func pick_up(item_name: String) -> void:
 		emit_signal("shieldEnergyChanged", shield_energy)
 	elif item_name == "laserstone":
 		if laser_active:
-			$Laser/EnergyTimer.start()
-			$Laser.time_left = 2.0
+			if $Laser.time_left == 2.0:
+				pass
+			else:
+				$Laser/EnergyTimer.start()
+				$Laser.time_left = 2.0
 		else:
 			laser_active = true
 			var laser = laser_scene.instance()

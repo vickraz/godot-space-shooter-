@@ -14,6 +14,11 @@ config/name="space shooter"
 run/main_scene="res://Scenes/MainMenu.tscn"
 config/icon="res://Ship/green_ship.png"
 
+[autoload]
+
+Transition="*res://Scenes/Transition.tscn"
+Shake="*res://Scenes/Shake.tscn"
+
 [display]
 
 window/stretch/mode="2d"

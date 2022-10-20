@@ -12,6 +12,8 @@ onready var timer = $EnergyTimer
 onready var raycast = $RayCast2D
 onready var beamparticles = $BeamParticles
 
+var laser_explosion_scene = preload("res://Scenes/LaserExplosion.tscn")
+
 func _ready() -> void:
 	visible = false
 	raycast.enabled = false
@@ -32,6 +34,7 @@ func _physics_process(delta: float) -> void:
 			var body = raycast.get_collider()
 			body.die()
 			points[1] = to_local(raycast.get_collision_point())
+			_add_explosion(raycast.get_collision_point())
 			
 		else:
 			points[1] = points[1].move_toward(Vector2(600, 0), 5000 * delta)
@@ -79,3 +82,10 @@ func _set_time_left() -> float:
 			return 2.0
 	else:
 		return 0.0
+
+func _add_explosion(pos: Vector2) -> void:
+	var explosion = laser_explosion_scene.instance()
+	explosion.global_position = pos
+	explosion.global_rotation = global_rotation
+	explosion.emitting = true
+	get_tree().get_root().add_child(explosion)
