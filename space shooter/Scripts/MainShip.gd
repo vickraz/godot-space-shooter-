@@ -16,6 +16,7 @@ var laser_active := false
 
 var bullet_scene = preload("res://Scenes/Bullet.tscn")
 var laser_scene = preload("res://Scenes/Laser.tscn")
+var pickup_patricles = preload("res://Scenes/PickUpParticles.tscn")
 
 var shield_energy := 100
 
@@ -112,6 +113,9 @@ func _on_AnimationPlayer_animation_finished(anim_name: String) -> void:
 		can_take_damage = true
 		
 func pick_up(item_name: String) -> void:
+	var particles = pickup_patricles.instance()
+	particles.emitting = true
+	add_child(particles)
 	if item_name == "energystone":
 		shield_energy += 25
 		if shield_energy > 100:

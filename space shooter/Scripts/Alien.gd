@@ -32,7 +32,7 @@ func _physics_process(delta: float) -> void:
 func die() -> void:
 	if not is_dead:
 		is_dead = true
-		Shake.start_shake(3, 0.3)
+		Shake.start_shake(3, 0.4)
 		emit_signal("scoreUpdated", 10)
 	var explosion_instance = alienExplosion_scene.instance()
 	explosion_instance.global_position = $Sprite.global_position + Vector2(-80, -50)
