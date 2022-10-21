@@ -1,11 +1,13 @@
 extends Timer
 
 
-var is_shaking = false
-var shake_amount = 0
+var is_shaking := false
+var shake_amount: = 0
 var shake_nodes = {}
 
-var noise_y = 0
+var noise_y := 0
+
+onready var tween := create_tween().set_parallel(true)
 
 onready var noise = OpenSimplexNoise.new()
 
@@ -27,6 +29,7 @@ func _process(delta: float) -> void:
 		
 func start_shake(amount, duration) -> void:
 	if amount >= shake_amount:
+		tween.kill()
 		is_shaking = true
 		shake_amount = amount
 		wait_time = duration
@@ -38,5 +41,7 @@ func _on_Shake_timeout() -> void:
 	shake_amount = 0
 	noise_y = 0
 	for node in shake_nodes.keys():
-		node.offset = Vector2.ZERO
-		node.rotation = 0
+		tween.tween_property(node, "offset", Vector2.ZERO, 0.1)
+		tween.tween_property(node, "rotation", 0, 0.1)
+		#node.offset = Vector2.ZERO
+		#node.rotation = 0

@@ -7,7 +7,7 @@
 blend_mode = 1
 
 [sub_resource type="Curve" id=5]
-_data = [ Vector2( 0.0115607, 0.650305 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.186669 ), 0.0, 0.0, 0, 0 ]
+_data = [ Vector2( 0, 0.415909 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.0977273 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="Gradient" id=3]
 colors = PoolColorArray( 1, 0.931962, 0, 1, 1, 0.956271, 0.0195312, 0.00392157 )
@@ -16,12 +16,12 @@ colors = PoolColorArray( 1, 0.931962, 0, 1, 1, 0.956271, 0.0195312, 0.00392157 )
 material = SubResource( 7 )
 scale = Vector2( 0.5, 0.5 )
 emitting = false
-amount = 12
+amount = 16
 one_shot = true
 explosiveness = 1.0
 texture = ExtResource( 1 )
 emission_shape = 1
-emission_sphere_radius = 40.0
+emission_sphere_radius = 50.0
 direction = Vector2( 0, 1 )
 spread = 180.0
 gravity = Vector2( 0, 0 )
