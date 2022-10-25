@@ -33,6 +33,7 @@ one_shot = true
 
 [node name="HUD" parent="." instance=ExtResource( 7 )]
 
+[connection signal="game_over" from="MainShip" to="HUD" method="_on_MainShip_game_over"]
 [connection signal="hit" from="MainShip" to="PowerupSpawner" method="_on_MainShip_hit"]
 [connection signal="shieldEnergyChanged" from="MainShip" to="HUD" method="_on_MainShip_shieldEnergyChanged"]
 [connection signal="timeout" from="AlienSpawner/AlienSpawnTimer" to="AlienSpawner" method="_on_AlienSpawnTimer_timeout"]

@@ -2,6 +2,7 @@ extends KinematicBody2D
 
 signal hit
 signal shieldEnergyChanged(shield_energy)
+signal game_over
 
 const ACCELERATION = 1500
 
@@ -17,6 +18,7 @@ var laser_active := false
 var bullet_scene = preload("res://Scenes/Bullet.tscn")
 var laser_scene = preload("res://Scenes/Laser.tscn")
 var pickup_patricles = preload("res://Scenes/PickUpParticles.tscn")
+var explosion_scene = preload("res://Scenes/BulletExplosion.tscn")
 
 var shield_energy := 100
 
@@ -97,8 +99,15 @@ func _on_ShootTimer_timeout() -> void:
 func take_damage(amount: int, direction: Vector2) -> void:
 	velocity = direction.normalized() * 1000
 	if shield_energy == 0 and can_take_damage:
-		Shake.shake_nodes = {}
-		Transition.load_scene("res://Scenes/MainMenu.tscn")
+		hide()
+		$CollisionPolygon2D.set_deferred("disabled", true)
+		var explosion_instance = explosion_scene.instance()
+		explosion_instance.global_position = global_position
+		explosion_instance.emitting = true
+		get_tree().get_root().add_child(explosion_instance)
+		emit_signal("game_over")
+		Shake.start_shake(7, 0.7)
+		set_physics_process(false)
 	elif can_take_damage:
 		emit_signal("hit")
 		shield_energy -= amount
