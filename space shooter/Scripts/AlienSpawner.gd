@@ -14,7 +14,7 @@ onready var HUD = get_parent().get_node("HUD")
 
 func _ready() -> void:
 	randomize()
-	$AlienSpawnTimer.wait_time = rand_range(1, 1 + (spawn_freq % 10) / 10)
+	$AlienSpawnTimer.wait_time = rand_range(1, 0.4 * spawn_freq - 0.9)
 	
 
 func _can_spawn_aliens() -> bool:
@@ -22,7 +22,7 @@ func _can_spawn_aliens() -> bool:
 	return number_of_aliens <= 10
 
 func _set_spawn_freq() -> int:
-	if spawn_freq % 10 == 0:
+	if number_of_spawns % 10 == 0:
 		if spawn_freq == 5:
 			return 5
 		else:
@@ -72,5 +72,5 @@ func _on_AlienSpawnTimer_timeout() -> void:
 			_spawn_swarm()
 		else:
 			_spawn_alien()
-		$AlienSpawnTimer.wait_time = rand_range(1, 1 + (spawn_freq % 10) / 10)
+		$AlienSpawnTimer.wait_time = rand_range(1, 0.4 * spawn_freq - 0.9)
 		

@@ -83,9 +83,14 @@ func _save_highscore(FILE_PATH) -> void:
 
 
 func _on_MainShip_game_over() -> void:
+	Globals.new_highscore = false
 	if score > highscore:
 		_save_highscore(SAVE_FILE_PATH)
+		highscore = score
+		Globals.new_highscore = true
 	
 	yield(get_tree().create_timer(0.7), "timeout")
+	Globals.score = score
+	Globals.highscore = highscore
 	Shake.shake_nodes = {}
-	Transition.load_scene("res://Scenes/MainMenu.tscn")
+	Transition.load_scene("res://Scenes/GameOverMenu.tscn")

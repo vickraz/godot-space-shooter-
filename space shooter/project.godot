@@ -18,6 +18,7 @@ config/icon="res://Ship/green_ship.png"
 
 Transition="*res://Scenes/Transition.tscn"
 Shake="*res://Scenes/Shake.tscn"
+Globals="*res://Scripts/Globals.gd"
 
 [display]
 
