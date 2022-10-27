@@ -4,7 +4,7 @@ extends Node
 const WIDTH = 1024
 const HEIGHT = 600
 
-var spawn_freq: int = 9 #oftare ju lägre
+var spawn_freq: int = 10 #oftare ju lägre
 var number_of_spawns = 0
 
 var alien_scene = preload("res://Scenes/Alien.tscn")

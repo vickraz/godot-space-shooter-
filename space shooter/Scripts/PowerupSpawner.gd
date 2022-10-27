@@ -26,7 +26,7 @@ func _on_EnergyStone_pickup() -> void:
 		$ShieldEnergyTimer.start()
 
 func _on_LaserStone_pickup() -> void:
-	$LaserTimer.wait_time = rand_range(2, 3)
+	$LaserTimer.wait_time = rand_range(10, 18)
 	$LaserTimer.start()
 
 

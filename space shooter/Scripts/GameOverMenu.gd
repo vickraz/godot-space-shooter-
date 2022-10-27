@@ -6,6 +6,7 @@ onready var layer3 = $ParallaxBackground/ParallaxLayer3
 
 var explosion1 = preload("res://Scenes/AlienGreenExplosion.tscn")
 var explosion2 = preload("res://Scenes/BulletExplosion.tscn")
+var explosion3 = preload("res://Scenes/LaserExplosion.tscn")
 
 func _ready() -> void:
 	randomize()
@@ -29,13 +30,19 @@ func _on_MainMenuButton_pressed() -> void:
 
 
 func _on_FireworksTimer_timeout() -> void:
-	var r = randi() % 2
+	var r = randi() % 3
 	var x = randi() % 1024
 	var y = randi() % 600
 	
 	if r == 0:
 		var explosion = explosion1.instance()
 		explosion.global_position = Vector2(x, y)
+		explosion.emitting = true
+		add_child(explosion)
+	elif r == 1:
+		var explosion = explosion3.instance()
+		explosion.global_position = Vector2(x, y)
+		explosion.global_rotation = rand_range(0, 2*PI)
 		explosion.emitting = true
 		add_child(explosion)
 	else:
