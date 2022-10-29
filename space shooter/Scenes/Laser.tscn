@@ -389,6 +389,6 @@ anims/outOfEnergy = SubResource( 16 )
 
 [node name="LaserSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
-volume_db = -8.0
+volume_db = -5.0
 
 [connection signal="timeout" from="EnergyTimer" to="." method="_on_EnergyTimer_timeout"]

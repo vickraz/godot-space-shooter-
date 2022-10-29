@@ -11,6 +11,8 @@ var musicOnPic = preload("res://MenuAssets/musicOn.png")
 var musicOffPic = preload("res://MenuAssets/musicOff.png")
 
 func _ready() -> void:
+	BackgroundMusic.reset_volume()
+	BackgroundMusic.play("GameMusic")
 	if AudioServer.is_bus_mute(0):
 		muteButton.texture_normal = musicOffPic
 	else:
@@ -31,7 +33,9 @@ func _process(delta: float) -> void:
 		
 	
 func _on_ButtonStart_pressed() -> void:
+	BackgroundMusic.change_volume()
 	Transition.load_scene("res://Scenes/World.tscn")
+	
 
 
 

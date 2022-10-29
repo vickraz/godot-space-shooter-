@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://Fonts and themes/Silkscreen-Regular.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Scenes/ParallaxBackground.tscn" type="PackedScene" id=2]
@@ -6,7 +6,6 @@
 [ext_resource path="res://MenuAssets/mouse1.png" type="Texture" id=4]
 [ext_resource path="res://Scripts/MainMenu.gd" type="Script" id=5]
 [ext_resource path="res://Scenes/Crosshair.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Sounds and music/Music/MainMenuMusic.ogg" type="AudioStream" id=7]
 [ext_resource path="res://MenuAssets/spaceLeft.png" type="Texture" id=8]
 [ext_resource path="res://MenuAssets/spaceRight.png" type="Texture" id=9]
 [ext_resource path="res://MenuAssets/spaceMid.png" type="Texture" id=10]
@@ -225,11 +224,6 @@ texture_normal = ExtResource( 12 )
 expand = true
 
 [node name="Crosshair" parent="." instance=ExtResource( 6 )]
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 7 )
-volume_db = -10.0
-autoplay = true
 
 [connection signal="pressed" from="VBoxContainer/ButtonStart" to="." method="_on_ButtonStart_pressed"]
 [connection signal="pressed" from="VBoxContainer/ButtonQuit" to="." method="_on_ButtonQuit_pressed"]

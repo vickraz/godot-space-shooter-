@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Sounds and music/Music/MainMenuMusic.ogg" type="AudioStream" id=1]
+[ext_resource path="res://Sounds and music/Music/Defeated (Game Over Tune).ogg" type="AudioStream" id=2]
+[ext_resource path="res://Sounds and music/Music/Victory Tune.ogg" type="AudioStream" id=3]
+[ext_resource path="res://Scripts/BackgroundMusic.gd" type="Script" id=4]
+
+[node name="BackgroundMusic" type="Node2D"]
+script = ExtResource( 4 )
+
+[node name="GameMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 1 )
+volume_db = -10.0
+
+[node name="GameOverMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 2 )
+volume_db = -10.0
+
+[node name="HighscoreMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+volume_db = -10.0

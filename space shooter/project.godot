@@ -15,17 +15,19 @@ run/main_scene="res://Scenes/MainMenu.tscn"
 boot_splash/image="res://MenuAssets/image001.png"
 boot_splash/fullsize=false
 boot_splash/bg_color=Color( 0, 0, 0, 1 )
-config/icon="res://Ship/green_ship.png"
+config/icon="res://Alien/alien-ufo.png.png"
 
 [autoload]
 
 Transition="*res://Scenes/Transition.tscn"
 Shake="*res://Scenes/Shake.tscn"
 Globals="*res://Scripts/Globals.gd"
+BackgroundMusic="*res://Scenes/BackgroundMusic.tscn"
 
 [display]
 
 window/stretch/mode="2d"
+window/stretch/aspect="keep"
 
 [input]
 
@@ -78,4 +80,5 @@ common/enable_pause_aware_picking=true
 
 [rendering]
 
+quality/driver/driver_name="GLES2"
 environment/default_environment="res://default_env.tres"
