@@ -1,9 +1,11 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Scenes/ParallaxBackground.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Fonts and themes/Silkscreen-Regular.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://Scripts/GameOverMenu.gd" type="Script" id=3]
 [ext_resource path="res://Scenes/Crosshair.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Sounds and music/Music/Victory Tune.ogg" type="AudioStream" id=5]
+[ext_resource path="res://Sounds and music/Music/Defeated (Game Over Tune).ogg" type="AudioStream" id=6]
 
 [sub_resource type="DynamicFont" id=1]
 size = 40
@@ -137,6 +139,14 @@ text = "Main menu"
 
 [node name="FireworksTimer" type="Timer" parent="."]
 wait_time = 0.1
+
+[node name="HighscoreSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
+volume_db = -10.0
+
+[node name="GameOverSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
+volume_db = -10.0
 
 [connection signal="pressed" from="MainMenuButton" to="." method="_on_MainMenuButton_pressed"]
 [connection signal="timeout" from="FireworksTimer" to="." method="_on_FireworksTimer_timeout"]

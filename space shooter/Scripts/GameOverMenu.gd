@@ -16,6 +16,9 @@ func _ready() -> void:
 	$NewHighScoreLabel.visible = Globals.new_highscore
 	if Globals.new_highscore:
 		$FireworksTimer.start()
+		$HighscoreSound.play()
+	else:
+		$GameOverSound.play()
 		
 		
 func _process(delta: float) -> void:

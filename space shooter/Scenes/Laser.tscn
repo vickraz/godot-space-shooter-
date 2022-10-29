@@ -1,7 +1,11 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://Scripts/Laser.gd" type="Script" id=1]
 [ext_resource path="res://Effects/glowing_circle.png" type="Texture" id=2]
+[ext_resource path="res://Sounds and music/Sounds/Laser.ogg" type="AudioStream" id=3]
+
+[sub_resource type="CanvasItemMaterial" id=17]
+blend_mode = 1
 
 [sub_resource type="Gradient" id=1]
 colors = PoolColorArray( 0.980469, 0.0153198, 0.0153198, 1, 1, 0.609375, 0, 1 )
@@ -114,6 +118,18 @@ tracks/4/keys = {
 "update": 0,
 "values": [ 0.0 ]
 }
+tracks/5/type = "value"
+tracks/5/path = NodePath("LaserSound:playing")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
 
 [sub_resource type="Animation" id=14]
 resource_name = "appear"
@@ -177,6 +193,18 @@ tracks/4/keys = {
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ 0.0, 10.0 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("LaserSound:playing")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
 }
 
 [sub_resource type="Animation" id=15]
@@ -256,6 +284,18 @@ tracks/5/keys = {
 "method": "_pause_timer"
 } ]
 }
+tracks/6/type = "value"
+tracks/6/path = NodePath("LaserSound:playing")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
 
 [sub_resource type="Animation" id=16]
 resource_name = "outOfEnergy"
@@ -312,6 +352,7 @@ tracks/3/keys = {
 }
 
 [node name="Laser" type="Line2D"]
+material = SubResource( 17 )
 points = PoolVector2Array( 0, 0, 600, 0 )
 width = 0.0
 default_color = Color( 1, 0.117647, 0, 1 )
@@ -345,5 +386,9 @@ anims/RESET = SubResource( 13 )
 anims/appear = SubResource( 14 )
 anims/disappear = SubResource( 15 )
 anims/outOfEnergy = SubResource( 16 )
+
+[node name="LaserSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+volume_db = -8.0
 
 [connection signal="timeout" from="EnergyTimer" to="." method="_on_EnergyTimer_timeout"]

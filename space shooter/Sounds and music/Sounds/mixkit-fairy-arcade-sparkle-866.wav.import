@@ -1,0 +1,23 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/mixkit-fairy-arcade-sparkle-866.wav-74d6263f5033e030b2654f2630bcad0d.sample"
+
+[deps]
+
+source_file="res://Sounds and music/Sounds/mixkit-fairy-arcade-sparkle-866.wav"
+dest_files=[ "res://.import/mixkit-fairy-arcade-sparkle-866.wav-74d6263f5033e030b2654f2630bcad0d.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=1
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

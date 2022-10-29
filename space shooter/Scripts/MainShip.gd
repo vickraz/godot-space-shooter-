@@ -69,6 +69,7 @@ func _rotate_ship() -> void:
 	rotation = lerp_angle(rotation, desired_rotation, 0.2)
 	
 func _shoot() -> void:
+	$BulletSound.play()
 	can_shoot = false
 	$ShootTimer.start()
 	
@@ -109,6 +110,7 @@ func take_damage(amount: int, direction: Vector2) -> void:
 		Shake.start_shake(7, 0.7)
 		set_physics_process(false)
 	elif can_take_damage:
+		$ForceShieldSound.play()
 		emit_signal("hit")
 		shield_energy -= amount
 		can_take_damage = false

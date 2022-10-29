@@ -11,5 +11,5 @@ dest_files=[ "res://.import/Bullet.ogg-b36438216674325f7ebf01d54c864766.oggstr" 
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0
